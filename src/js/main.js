@@ -196,7 +196,8 @@ const selectedIcon = localStorage.getItem("selected-icon");
 const getCurrentTheme = () =>
   document.body.classList.contains(darkTheme) ? "dark" : "light";
 const getCurrentIcon = () =>
-  themeButton.classList.contains(iconTheme) ? "uil-moon" : "uil-moon";
+  themeButton.classList.contains(iconTheme) ? "uil-moon" : "uil-sun";
+
 
 // We validate if the user previously chose a topic
 if (selectedTheme) {
@@ -208,6 +209,7 @@ if (selectedTheme) {
     iconTheme
   );
 }
+
 
 // Activate / deactivate the theme manually with the button
 themeButton.addEventListener("click", () => {
