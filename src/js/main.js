@@ -45,59 +45,8 @@ function toggleSkills() {
     this.parentNode.className = "skills__content skills__open";
   }
 }
-
 skillsHeader.forEach((el) => {
   el.addEventListener("click", toggleSkills);
-});
-
-/* QUALIFICATION TABS */
-const tabs = document.querySelectorAll("[data-target]");
-const tabContents = document.querySelectorAll("[data-content]");
-
-// console.log(tabs);
-
-tabs.forEach((tab) => {
-  tab.addEventListener("click", () => {
-    const target = document.querySelector(tab.dataset.target);
-    // console.log(target);
-
-    tabContents.forEach((tabContent) => {
-      tabContent.classList.remove("qualification__active");
-    });
-    target.classList.add("qualification__active");
-
-    tabs.forEach((tab) => {
-      console.log(tab);
-
-      tab.classList.remove("qualification__active");
-    });
-    tab.classList.add("qualification__active");
-  });
-});
-
-/* SERVICE MODAL */
-const modalViews = document.querySelectorAll(".services__modal");
-const modalBtns = document.querySelectorAll(".services__button");
-const modalCloses = document.querySelectorAll(".services__modal-close");
-
-let modal = function (modalClick) {
-  modalViews[modalClick].classList.add("active-modal");
-};
-
-modalBtns.forEach((modalBtn, i) => {
-  modalBtn.addEventListener("click", () => {
-    // console.log("services__modal");
-    modal(i);
-  });
-});
-
-// Modal closes
-modalCloses.forEach((modalClose) => {
-  modalClose.addEventListener("click", () => {
-    modalViews.forEach((modalView) => {
-      modalView.classList.remove("active-modal");
-    });
-  });
 });
 
 /* PORTFOLIO */
@@ -120,29 +69,13 @@ let swiperPortfolio = new Swiper(".portfolio__container", {
 /* PROJECT IN MIND */
 
 /* TESTIMONIAL */
-let swiperTestimonial = new Swiper(".testimonial__container ", {
-  loop: true,
-  GrabCursor: true,
-  spaceBetween: 48,
 
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-    dynamicBullets: true,
-  },
-
-  breakpoints: {
-    568: {
-      slidesPerview: 2,
-    },
-  },
-});
 /* CONTACT ME */
 /* FOOTER */
 
 /* SCROLL SECTIONS ACTIVE LINK */
 const sections = document.querySelectorAll("section[id]");
-console.log(sections);
+// console.log(sections);
 
 function scrollActive() {
   const scrollY = window.pageYOffset;
@@ -198,7 +131,6 @@ const getCurrentTheme = () =>
 const getCurrentIcon = () =>
   themeButton.classList.contains(iconTheme) ? "uil-moon" : "uil-sun";
 
-
 // We validate if the user previously chose a topic
 if (selectedTheme) {
   // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
@@ -210,7 +142,6 @@ if (selectedTheme) {
   );
 }
 
-
 // Activate / deactivate the theme manually with the button
 themeButton.addEventListener("click", () => {
   // Add or remove the dark / icon theme
@@ -219,4 +150,44 @@ themeButton.addEventListener("click", () => {
   // We save the theme and the current icon that the user chose
   localStorage.setItem("selected-theme", getCurrentTheme());
   localStorage.setItem("selected-icon", getCurrentIcon());
+});
+
+/* FORM */
+const form = document.getElementById("form_contact");
+const nom = document.getElementById("name");
+const email = document.getElementById("email");
+const regexMail = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g);
+const msg = document.getElementById("msg");
+const errors = document.getElementById("errors");
+
+const $ss = "";
+
+window.addEventListener("DOMContentLoaded", function () {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    let messages = [];
+    if (nom.value === "" || nom.value == null) {
+      messages.push("Nom ne peut pas être vide");
+    }
+
+    if (email.value === "" || !regexMail.test(email.value)) {
+      messages.push("Veuillez saissir une adresse mail valide");
+    }
+
+    if (msg.value === "" || msg.value == null) {
+      messages.push("Veuillez saisir un message.");
+    }
+
+    if (messages.length > 0) {
+      errors.innerText = messages.join(", ");
+      errors.classList.add("errors");
+    } else {
+      errors.innerText = "Merci pour votre message. Je vous répondrai bientôt.";
+      errors.classList.add("success");
+
+      nom.value = "";
+      email.value = "";
+      msg.value = "";
+    }
+  });
 });
