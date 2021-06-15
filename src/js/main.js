@@ -65,14 +65,7 @@ let swiperPortfolio = new Swiper(".portfolio__container", {
   // mousewheel: true,
   // keyboard: true,
 });
-
-/* PROJECT IN MIND */
-
-/* TESTIMONIAL */
-
-/* CONTACT ME */
-/* FOOTER */
-
+git
 /* SCROLL SECTIONS ACTIVE LINK */
 const sections = document.querySelectorAll("section[id]");
 // console.log(sections);
